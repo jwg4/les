@@ -7,4 +7,4 @@ class CompareErrorMessages(unittest.TestCase):
         ret = subprocess.call(args)
         args2 = ['ls', 'foo']
         ret2 = subprocess.call(args2)
-        self.assertEqual(ret, ret2)
+        self.assertEqual(ret == 0, ret2 == 0)
