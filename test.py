@@ -23,4 +23,6 @@ class CompareErrorMessages(unittest.TestCase):
         msg = self.get_output(args)
         args2 = ['ls', 'foo']
         msg2 = self.get_output(args2)
-        self.assertEqual(msg, msg2)
+        args3 = ['less', 'foo']
+        msg3 = self.get_output(args3)
+        self.assertTrue(msg == msg2 or msg == msg3)
