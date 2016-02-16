@@ -1,12 +1,14 @@
+import os
 import subprocess
 import unittest
 
 class CompareErrorMessages(unittest.TestCase):
     def test_missing_file_return_code_the_same_as_ls(self):
+        DEVNULL = open(os.devnull, 'wb')
         args = ['./lss.sh', 'foo']
-        ret = subprocess.call(args)
+        ret = subprocess.call(args, stderr=DEVNULL)
         args2 = ['ls', 'foo']
-        ret2 = subprocess.call(args2)
+        ret2 = subprocess.call(args2, stderr=DEVNULL)
         self.assertEqual(ret == 0, ret2 == 0)
 
     def get_output(self, args):
