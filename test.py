@@ -9,15 +9,16 @@ class CompareErrorMessages(unittest.TestCase):
         ret2 = subprocess.call(args2)
         self.assertEqual(ret == 0, ret2 == 0)
 
-    def test_missing_file_message_code_the_same_as_ls(self):
-        args = ['./lss.sh', 'foo']
+    def get_output(self, args):
         try:
-            subprocess.check_output(args, stderr=subprocess.STDOUT)
+            msg = subprocess.check_output(args, stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as e:
             msg = e.output
+        return msg
+
+    def test_missing_file_message_code_the_same_as_ls(self):
+        args = ['./lss.sh', 'foo']
+        msg = self.get_output(args)
         args2 = ['ls', 'foo']
-        try:
-            subprocess.check_output(args2, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError as e:
-            msg2 = e.output
+        msg2 = self.get_output(args2)
         self.assertEqual(msg, msg2)
