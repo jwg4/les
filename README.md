@@ -1,5 +1,5 @@
-# les
+# lss
 
 ```
-alias les='~/bin/les.sh'
+alias lss='~/bin/lss.sh'
 ```
